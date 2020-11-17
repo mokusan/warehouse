@@ -1,6 +1,9 @@
 # warehouse
 Tarea curso springboot
 
+# modelo de datos:
+https://github.com/mokusan/warehouse/blob/master/modelo-warehouse-app.png
+
 #JSON para crear producto
 {
     "nombre": "refrigerador",
