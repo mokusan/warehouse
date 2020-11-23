@@ -1,5 +1,7 @@
 package com.jcry.warehouse.model;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.JoinColumn;
 import javax.persistence.ForeignKey;
@@ -24,12 +27,14 @@ public class Producto {
 	@Column(name = "nombre", nullable = false, unique = true)
 	private String nombre;
 	
-	@Column(name = "precio", nullable = false, unique = true)
+	@Column(name = "precio", nullable = false, unique = false)
 	private String precio;
 	
-	@ManyToOne(optional = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "id_fabricante", nullable = false, foreignKey = @ForeignKey(name = "FK_productos_fabricante"))
+	@ManyToOne
     private Fabricante fabricante;
+	
+	@OneToMany(mappedBy = "producto")
+	private List<Inventario> inventario;
 		
 	public Producto() {
 	}
@@ -37,7 +42,6 @@ public class Producto {
 	public Producto(String nombre, String precio, Fabricante fabricante) {
 		this.nombre = nombre;
 		this.precio = precio;
-		this.fabricante = fabricante;
 	}
 
 	public Integer getIdProducto() {

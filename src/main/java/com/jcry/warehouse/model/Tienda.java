@@ -1,10 +1,13 @@
 package com.jcry.warehouse.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -19,8 +22,11 @@ public class Tienda {
 	@Column(name = "nombre", nullable = false, unique = true)
 	private String nombre;
 	
-	@Column(name = "direccion", nullable = false, unique = true)
+	@Column(name = "direccion", nullable = false, unique = false)
 	private String direccion;
+	
+	@OneToMany(mappedBy = "tienda")
+	private List<Inventario> inventario;
 
 	public Tienda() {
 	}
@@ -30,16 +36,16 @@ public class Tienda {
 		this.direccion = direccion;
 	}
 
+	public String getNombre() {
+		return nombre;
+	}
+
 	public Integer getIdTienda() {
 		return idTienda;
 	}
 
 	public void setIdTienda(Integer idTienda) {
 		this.idTienda = idTienda;
-	}
-
-	public String getNombre() {
-		return nombre;
 	}
 
 	public void setNombre(String nombre) {
@@ -52,10 +58,5 @@ public class Tienda {
 
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
-	}
-
-	@Override
-	public String toString() {
-		return "Tienda [idTienda=" + idTienda + ", nombre=" + nombre + ", direccion=" + direccion + "]";
 	}
 }

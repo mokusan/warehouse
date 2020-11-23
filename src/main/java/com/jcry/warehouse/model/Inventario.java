@@ -4,13 +4,11 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.JoinColumn;
 
 @Entity
 @Table(name = "inventario")
@@ -21,32 +19,30 @@ public class Inventario {
 //	@Column(name = "id_inventario", nullable = false)
 	private Integer idInventario;	
 	
-	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "id_producto", nullable = false, foreignKey = @ForeignKey(name = "FK_inventario_producto"))
+	@ManyToOne
+//	(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Producto producto;
 	
-	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "id_tienda", nullable = false, foreignKey = @ForeignKey(name = "FK_inventario_tienda"))
+	@ManyToOne
+//	(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Tienda tienda;
 
 	@Column(name = "cantidad", nullable = false)
-	private Integer cantidad;
+	private Integer cantidad;	
 
 	public Inventario() {
-	}
+	}	
 
-	public Inventario(Producto producto, Tienda tienda, Integer cantidad) {
-		this.producto = producto;
-		this.tienda = tienda;
+	public Inventario(Integer cantidad) {		
 		this.cantidad = cantidad;
+	}	
+	
+	public Integer getIdInventario() {
+		return idInventario;
 	}
 
-	public Producto getProducto() {
-		return producto;
-	}
-
-	public void setProducto(Producto producto) {
-		this.producto = producto;
+	public void setIdInventario(Integer idInventario) {
+		this.idInventario = idInventario;
 	}
 
 	public Tienda getTienda() {
@@ -57,6 +53,14 @@ public class Inventario {
 		this.tienda = tienda;
 	}
 
+	public Producto getProducto() {
+		return producto;
+	}
+
+	public void setProducto(Producto producto) {
+		this.producto = producto;
+	}
+
 	public Integer getCantidad() {
 		return cantidad;
 	}
@@ -64,9 +68,4 @@ public class Inventario {
 	public void setCantidad(Integer cantidad) {
 		this.cantidad = cantidad;
 	}
-
-	@Override
-	public String toString() {
-		return "Inventario [producto=" + producto + ", tienda=" + tienda + ", cantidad=" + cantidad + "]";
-	}	
 }
