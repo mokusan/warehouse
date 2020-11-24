@@ -6,15 +6,23 @@ https://github.com/mokusan/warehouse/blob/master/modelo-warehouse-app.png
 
 ## solicitar token de autenticacion 
 url: localhost:8080/oauth/token
-request:
-    Auth basic: username y password especificados en archivo de propiedades
-    body: form-data
-        key/value:
-            username: (el especificado en BD)
-            password: (el especificado en BD)
-            grant_type: password
 
-* todos los request a cualquier api requieren un header "Authorization" con value "bearer <token>"
+request:
+
+    Auth basic: username y password especificados en archivo de propiedades
+    
+    body: form-data
+    
+        key/value:
+        
+            username: (el especificado en BD)
+            
+            password: (el especificado en BD)
+            
+            grant_type: password
+            
+
+*** todos los request a cualquier api requieren un header "Authorization" con value "bearer <token>"
 ## crear fabricante:
 {
     "nombre": "fabricante 1"
