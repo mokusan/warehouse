@@ -1,15 +1,26 @@
 # warehouse
 Tarea curso springboot
 
-# modelo de datos:
+## modelo de datos:
 https://github.com/mokusan/warehouse/blob/master/modelo-warehouse-app.png
 
-# crear fabricante:
+## solicitar token de autenticacion 
+url: localhost:8080/oauth/token
+request:
+    Auth basic: username y password especificados en archivo de propiedades
+    body: form-data
+        key/value:
+            username: (el especificado en BD)
+            password: (el especificado en BD)
+            grant_type: password
+
+* todos los request a cualquier api requieren un header "Authorization" con value "bearer <token>"
+## crear fabricante:
 {
     "nombre": "fabricante 1"
 }
 
-# crear producto 
+## crear producto 
 {
     "idProducto": 1,
     "nombre": "producto 1",
@@ -20,13 +31,13 @@ https://github.com/mokusan/warehouse/blob/master/modelo-warehouse-app.png
     }
 }
 
-# crear tienda
+## crear tienda
 {
     "nombre": "tienda 1",
     "direccion": "calle, Santiago"
 }
 
-# crear inventario
+## crear inventario
 {
     "producto": {
         "idProducto": 1,
@@ -44,3 +55,4 @@ https://github.com/mokusan/warehouse/blob/master/modelo-warehouse-app.png
         "direccion": "marin, Santiago"
     }
 }
+
