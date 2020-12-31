@@ -12,8 +12,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.jcry.warehouse.exceptions.ModelException;
 import com.jcry.warehouse.model.Usuario;
 import com.jcry.warehouse.repository.UsuarioRepository;
+import com.jcry.warehouse.service.IUsuarioService;
 
 /**
  * A esta clase llega spring de forma automatica cuando se llama a la url de autenticacion, la que entrega el token
@@ -22,7 +24,7 @@ import com.jcry.warehouse.repository.UsuarioRepository;
  *
  */
 @Service
-public class UsuarioServiceImpl  implements UserDetailsService{
+public class UsuarioServiceImpl implements UserDetailsService, IUsuarioService {
 	
 	@Autowired
 	private UsuarioRepository repo;
@@ -45,5 +47,35 @@ public class UsuarioServiceImpl  implements UserDetailsService{
 		UserDetails ud = new User(usuario.getUsername(), usuario.getPassword(), roles);
 
 		return ud;
+	}
+
+	@Override
+	public Usuario registrar(Usuario obj) {
+		return repo.save(obj);
+	}
+
+	@Override
+	public Usuario modificar(Usuario obj) {
+		return repo.save(obj);
+	}
+
+	@Override
+	public List<Usuario> listarTodo() {
+		return repo.findAll();
+	}
+
+	@Override
+	public Usuario buscarPorId(Integer id) {
+		if (repo.findById(id).get() == null) {
+			throw new ModelException("Error: Registro con ID " + id + " no existe");
+		} else {
+			return repo.findById(id).get();
+		}	
+	}
+
+	@Override
+	public boolean eliminar(Integer id) {
+		repo.deleteById(id);
+		return true;
 	}
 }

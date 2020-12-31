@@ -6,38 +6,39 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jcry.warehouse.exceptions.ModelException;
-import com.jcry.warehouse.model.Fabricante;
-import com.jcry.warehouse.repository.FabricanteRepository;
-import com.jcry.warehouse.service.FabricanteService;
+import com.jcry.warehouse.model.VentasDetalles;
+import com.jcry.warehouse.repository.VendedoresRepository;
+import com.jcry.warehouse.repository.VentasDetallesRepository;
+import com.jcry.warehouse.service.VentasDetallesService;
 
 @Service
-public class FabricanteServiceImpl implements FabricanteService {
+public class VentasDetallesServiceImpl implements VentasDetallesService {
 	
 	@Autowired
-	private FabricanteRepository repo;
+	private VentasDetallesRepository repo;
 
 	@Override
-	public Fabricante registrar(Fabricante obj) {
+	public VentasDetalles registrar(VentasDetalles obj) {
 		return repo.save(obj);
 	}
 
 	@Override
-	public Fabricante modificar(Fabricante obj) {
+	public VentasDetalles modificar(VentasDetalles obj) {
 		return repo.save(obj);
 	}
 
 	@Override
-	public List<Fabricante> listarTodo() {
+	public List<VentasDetalles> listarTodo() {
 		return repo.findAll();
 	}
 
 	@Override
-	public Fabricante buscarPorId(Integer id) {
+	public VentasDetalles buscarPorId(Integer id) {
 		if (repo.findById(id).get() == null) {
 			throw new ModelException("Error: Registro con ID " + id + " no existe");
 		} else {
 			return repo.findById(id).get();
-		}		
+		}	
 	}
 
 	@Override
