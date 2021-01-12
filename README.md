@@ -1,5 +1,5 @@
 # warehouse
-Proyecto curso springboot
+Proyecto springboot
 
 ## modelo de datos:
 (DESACTUALIZADO) https://github.com/mokusan/warehouse/blob/master/modelo-warehouse-app.png
