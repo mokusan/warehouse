@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
+
+import io.swagger.annotations.ApiModelProperty;
 
 @Entity
 @Table(name = "ventas")
@@ -28,6 +31,8 @@ public class Ventas {
 	@ManyToOne
     private Tienda tienda;
 	
+	@ApiModelProperty(notes = "El campo \"fecha\" debe tener al menos 8 caracteres")
+	@Size(min = 8, message = "El campo \"fecha\" debe tener al menos 8 caracteres")
 	@Column(name = "fecha", nullable = false)
 	private String fecha;	
 	

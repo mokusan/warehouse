@@ -9,6 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
+
+import io.swagger.annotations.ApiModelProperty;
 
 @Entity
 @Table(name = "inventario")
@@ -27,6 +30,8 @@ public class Inventario {
 //	(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Tienda tienda;
 
+	@ApiModelProperty(notes = "El campo \"nombre\" debe tener al menos 2 caracteres")
+	@Size(min = 2, message = "El campo \"nombre\" debe tener al menos 2 caracteres")
 	@Column(name = "cantidad", nullable = false)
 	private Integer cantidad;	
 

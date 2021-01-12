@@ -12,6 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
+
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.JoinColumn;
 import javax.persistence.ForeignKey;
 
@@ -24,9 +28,13 @@ public class Producto {
 //	@Column(name = "id_producto", nullable = false)
 	private Integer idProducto;	
 	
+	@ApiModelProperty(notes = "El campo \"nombre\" debe tener al menos 2 caracteres")
+	@Size(min = 2, message = "El campo \"nombre\" debe tener al menos 2 caracteres")
 	@Column(name = "nombre", nullable = false, unique = true)
 	private String nombre;
 	
+	@ApiModelProperty(notes = "El campo \"precio\" debe tener al menos 1 caracteres")
+	@Size(min = 1, message = "El campo \"precio\" debe tener al menos 1 caracteres")
 	@Column(name = "precio", nullable = false, unique = false)
 	private String precio;
 	

@@ -9,6 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
+
+import io.swagger.annotations.ApiModelProperty;
 
 @Entity
 @Table(name = "tienda")
@@ -19,9 +22,13 @@ public class Tienda {
 //	@Column(name = "id_tienda, nullable = false)
 	private Integer idTienda;
 		
+	@ApiModelProperty(notes = "El campo \"nombre\" debe tener al menos 2 caracteres")
+	@Size(min = 2, message = "El campo \"nombre\" debe tener al menos 2 caracteres")
 	@Column(name = "nombre", nullable = false, unique = true)
 	private String nombre;
 	
+	@ApiModelProperty(notes = "El campo \"direccion\" debe tener al menos 2 caracteres")
+	@Size(min = 3, message = "El campo \"direccion\" debe tener al menos 3 caracteres")
 	@Column(name = "direccion", nullable = false, unique = false)
 	private String direccion;
 	

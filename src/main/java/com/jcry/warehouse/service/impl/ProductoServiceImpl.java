@@ -1,6 +1,7 @@
 package com.jcry.warehouse.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,20 +34,22 @@ public class ProductoServiceImpl implements ProductoService {
 
 	@Override
 	public Producto buscarPorId(Integer id) {
-		if (repo.findById(id).get() == null) {
+		Optional<Producto> producto = repo.findById(id);
+		if (!producto.isPresent()) {
 			throw new ModelException("Error: Registro con ID " + id + " no existe");
 		} else {
-			return repo.findById(id).get();
+			return producto.get();
 		}	
 	}
 
 	@Override
 	public boolean eliminar(Integer id) {
-		if (repo.findById(id).get() == null) {
+		Optional<Producto> producto = repo.findById(id);
+		if (!producto.isPresent()) {
 			throw new ModelException("Error: Registro con ID " + id + " no existe");
 		} else {
 			repo.deleteById(id);
 			return true;
-		}	
+		}
 	}
 }

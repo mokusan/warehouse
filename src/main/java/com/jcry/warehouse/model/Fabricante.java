@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
+
+import io.swagger.annotations.ApiModelProperty;
 
 @Entity
 @Table(name = "fabricante")
@@ -22,6 +25,8 @@ public class Fabricante {
 //	@Column(name = "id_fabricante", nullable = false)
 	private Integer idFabricante;
 	
+	@ApiModelProperty(notes = "El campo \"nombre\" debe tener al menos 2 caracteres")
+	@Size(min = 2, message = "El campo \"nombre\" debe tener al menos 2 caracteres")
 	@Column(name = "nombre", nullable = false, unique = true)
 	private String nombre;
 	

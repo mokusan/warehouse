@@ -9,6 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
+
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.JoinColumn;
 
 @Entity
@@ -18,12 +22,18 @@ public class Usuario {
 	@Id
 	private Integer idUsuario;
 	
+	@ApiModelProperty(notes = "El campo \"nombre\" debe tener al menos 2 caracteres")
+	@Size(min = 2, message = "El campo \"nombre\" debe tener al menos 2 caracteres")
 	@Column(name = "nombre", nullable = false, unique = true)
 	private String username;
 	
+	@ApiModelProperty(notes = "El campo \"clave\" debe tener al menos 3 caracteres")
+	@Size(min = 3, message = "El campo \"clave\" debe tener al menos 3 caracteres")
 	@Column(name = "clave", nullable = false)
 	private String password;
 	
+	@ApiModelProperty(notes = "El campo \"estado\" debe tener al menos 2 caracteres")
+	@Size(min = 2, message = "El campo \"estado\" debe tener al menos 2 caracteres")
 	@Column(name = "estado", nullable = false)
 	private boolean enabled;
 	

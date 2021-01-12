@@ -1,13 +1,13 @@
 package com.jcry.warehouse.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jcry.warehouse.exceptions.ModelException;
 import com.jcry.warehouse.model.VentasDetalles;
-import com.jcry.warehouse.repository.VendedoresRepository;
 import com.jcry.warehouse.repository.VentasDetallesRepository;
 import com.jcry.warehouse.service.VentasDetallesService;
 
@@ -34,20 +34,22 @@ public class VentasDetallesServiceImpl implements VentasDetallesService {
 
 	@Override
 	public VentasDetalles buscarPorId(Integer id) {
-		if (repo.findById(id).get() == null) {
+		Optional<VentasDetalles> ventasDetalles = repo.findById(id);
+		if (!ventasDetalles.isPresent()) {
 			throw new ModelException("Error: Registro con ID " + id + " no existe");
 		} else {
-			return repo.findById(id).get();
-		}	
+			return ventasDetalles.get();
+		}
 	}
 
 	@Override
 	public boolean eliminar(Integer id) {
-		if (repo.findById(id).get() == null) {
+		Optional<VentasDetalles> ventasDetalles = repo.findById(id);
+		if (!ventasDetalles.isPresent()) {
 			throw new ModelException("Error: Registro con ID " + id + " no existe");
 		} else {
 			repo.deleteById(id);
 			return true;
-		}	
+		}
 	}
 }

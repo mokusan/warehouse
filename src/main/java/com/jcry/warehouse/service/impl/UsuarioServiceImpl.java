@@ -2,6 +2,7 @@ package com.jcry.warehouse.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -66,16 +67,22 @@ public class UsuarioServiceImpl implements UserDetailsService, IUsuarioService {
 
 	@Override
 	public Usuario buscarPorId(Integer id) {
-		if (repo.findById(id).get() == null) {
+		Optional<Usuario> usuario = repo.findById(id);
+		if (!usuario.isPresent()) {
 			throw new ModelException("Error: Registro con ID " + id + " no existe");
 		} else {
-			return repo.findById(id).get();
-		}	
+			return usuario.get();
+		}
 	}
 
 	@Override
 	public boolean eliminar(Integer id) {
-		repo.deleteById(id);
-		return true;
+		Optional<Usuario> usuario = repo.findById(id);
+		if (!usuario.isPresent()) {
+			throw new ModelException("Error: Registro con ID " + id + " no existe");
+		} else {
+			repo.deleteById(id);
+			return true;
+		}		
 	}
 }
