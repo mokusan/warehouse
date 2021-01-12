@@ -6,6 +6,3 @@ Proyecto curso springboot
 
 ## Documentación de servicios REST y modelos
 http://localhost:8080/swagger-ui.html
-
-## solicitar token de autenticacion 
-url: localhost:8080/oauth/token
